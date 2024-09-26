@@ -6,6 +6,8 @@ import HomePage from './pages/HomePage';
 import SearchResultsPage from './pages/SearchResultsPage';
 import MovieDetailsPage from './pages/MovieDetailsPage';
 import FavoritesPage from './pages/FavoritesPage';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
             <Route path="/search" element={<SearchResultsPage />} />
             <Route path="/movie/:id" element={<MovieDetailsPage />} />
             <Route path="/favorites" element={<FavoritesPage />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
           </Routes>
         </main>
         <Footer />
