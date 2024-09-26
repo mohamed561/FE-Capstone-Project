@@ -4,7 +4,7 @@ import SearchBar from '../components/SearchBar';
 import MovieCard from '../components/MovieCard';
 import { getPopularMovies } from '../services/api';
 
-function HomePage() {
+const HomePage = () => {
   const [popularMovies, setPopularMovies] = useState([]);
 
   useEffect(() => {
@@ -22,15 +22,16 @@ function HomePage() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-navy-900 text-white p-4">
-      <h1 className="text-5xl font-bold mb-8">
-        <span className="text-teal-300">THE</span>
-        <span className="text-teal-400">MOVIE</span>
-        <span className="text-teal-500">DB</span>
-      </h1>
+      <div className="w-48 h-24 bg-sky-500 flex items-center justify-center text-white text-2xl font-bold mb-8">
+        MovieDB Logo
+      </div>
       <div className="w-full max-w-2xl mb-8">
         <SearchBar />
       </div>
-      <Link to="/explore" className="mb-12 bg-gray-200 text-navy-900 px-6 py-2 rounded-full hover:bg-gray-300 transition-colors">
+      <Link 
+        to="/explore" 
+        className="mb-12 bg-teal-400 text-navy-900 px-6 py-2 rounded-full hover:bg-teal-500 transition-colors"
+      >
         View Full Website
       </Link>
       <div className="w-full max-w-4xl">
@@ -43,6 +44,6 @@ function HomePage() {
       </div>
     </div>
   );
-}
+};
 
 export default HomePage;
