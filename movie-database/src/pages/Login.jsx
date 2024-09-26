@@ -51,7 +51,7 @@ function Login() {
 
           <div className="mb-6">
             <ReCAPTCHA
-              sitekey="6LfVAlAqAAAAANxbvB8W8ZVrnzxms1AZQXSbkRo_"
+              sitekey="6LfXAlAqAAAAANM4k8DRmixDkGJE_8y1mekrwrqV"
               onChange={onCaptchaChange}
             />
           </div>
