@@ -66,10 +66,6 @@ function Signup() {
           </div>
 
           <div className="mb-6">
-            <ReCAPTCHA
-              sitekey="6LfXAlAqAAAAANM4k8DRmixDkGJE_8y1mekrwrqV"
-              onChange={onCaptchaChange}
-            />
           </div>
 
           <button
