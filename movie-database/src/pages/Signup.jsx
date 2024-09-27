@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
+import { auth } from './firebase'; // Ensure you have firebase.js configured
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 
 function Signup() {
   const [username, setUsername] = useState('');
@@ -7,19 +9,31 @@ function Signup() {
   const [password, setPassword] = useState('');
   const [captchaVerified, setCaptchaVerified] = useState(false);
 
-  const handleSignup = (e) => {
+  const handleSignup = async (e) => {
     e.preventDefault();
+    
     if (!captchaVerified) {
       alert('Please complete the CAPTCHA verification');
       return;
     }
-    // Handle signup logic here
-    console.log('Username:', username, 'Email:', email, 'Password:', password);
+
+    try {
+      // Sign up with Firebase using email and password
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      
+      // Optionally store additional user data (e.g., username)
+      console.log('User signed up successfully:', userCredential.user);
+      alert('User signed up successfully!');
+      
+    } catch (error) {
+      console.error('Error during sign up:', error);
+      alert(`Error during sign up: ${error.message}`);
+    }
   };
 
   const onCaptchaChange = (value) => {
     setCaptchaVerified(true);
-    console.log('CAPTCHA value:', value);
+    console.log('CAPTCHA verified:', value);
   };
 
   const handleGitHubSignup = () => {
