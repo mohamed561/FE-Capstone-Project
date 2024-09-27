@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
-import { auth, provider } from '../firebase';
+import { auth, provider } from '../firebase';  // Adjust the path as needed
 import { signInWithPopup } from 'firebase/auth';
 
 function Login() {
@@ -14,12 +14,12 @@ function Login() {
       alert('Please complete the CAPTCHA verification');
       return;
     }
-  
+    // Handle email-password login logic here
     console.log('Email:', email, 'Password:', password);
   };
 
   const onCaptchaChange = (value) => {
-    setCaptchaVerified(true); 
+    setCaptchaVerified(true);  // When captcha is solved
     console.log('CAPTCHA value:', value);
   };
 
