@@ -1,6 +1,6 @@
 // ListOfAllMovies.js
 import React, { useState, useEffect } from 'react';
-import { fetchMovies } from './services/api.js';
+import { fetchMovies } from '../services/api';
 
 const ListOfAllMovies = () => {
   const [movies, setMovies] = useState([]);
