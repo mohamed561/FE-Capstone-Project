@@ -5,11 +5,7 @@ function Header() {
   return (
     <header className="bg-[#00071f] text-white p-4">
       <div className="container mx-auto flex justify-between items-center">
-        {/* Logo */}
-        <Link to="/">
-          <img src="./sources/logo.png" alt="Logo" className="h-10" />
-        </Link>
-
+        
         {/* Centered Navigation */}
         <nav className="flex-grow">
           <ul className="flex justify-center space-x-8">
