@@ -1,47 +1,35 @@
 import React, { useState } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
 
-function Signup() {
-  const [username, setUsername] = useState('');
+function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [captchaVerified, setCaptchaVerified] = useState(false);
 
-  const handleSignup = (e) => {
+  const handleLogin = (e) => {
     e.preventDefault();
     if (!captchaVerified) {
       alert('Please complete the CAPTCHA verification');
       return;
     }
-    // Handle signup logic here
-    console.log('Username:', username, 'Email:', email, 'Password:', password);
+    // Handle login logic here
+    console.log('Email:', email, 'Password:', password);
   };
 
   const onCaptchaChange = (value) => {
-    setCaptchaVerified(true);
+    setCaptchaVerified(true);  // When captcha is solved
     console.log('CAPTCHA value:', value);
   };
 
-  const handleGitHubSignup = () => {
+  const handleGitHubLogin = () => {
     window.location.href = 'https://github.com/login/oauth/authorize?client_id=YOUR_CLIENT_ID';
   };
 
   return (
     <div className="flex justify-center items-center h-screen bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
-        <h2 className="text-3xl font-bold text-center mb-8 text-blue-600">Create an Account</h2>
-        <form onSubmit={handleSignup}>
-          <div className="mb-6">
-            <label className="block text-gray-700 font-medium mb-2">Username</label>
-            <input
-              type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring focus:ring-blue-300 focus:outline-none"
-              placeholder="Enter your username"
-              required
-            />
-          </div>
+        <h2 className="text-3xl font-bold text-center mb-8 text-blue-600">Login to Your Account</h2>
+        <form onSubmit={handleLogin}>
           <div className="mb-6">
             <label className="block text-gray-700 font-medium mb-2">Email</label>
             <input
@@ -72,19 +60,20 @@ function Signup() {
                 onChange={onCaptchaChange}
               />
             </div>
+            <a href="/forgot-password" className="text-blue-600 hover:underline">Forgot Password?</a>
           </div>
 
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition-colors mb-4"
+            className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition-colors"
           >
-            Sign Up
+            Login
           </button>
 
           <button
             type="button"
-            onClick={handleGitHubSignup}
-            className="w-full bg-gray-800 text-white py-2 rounded-md hover:bg-gray-900 transition-colors flex items-center justify-center"
+            onClick={handleGitHubLogin}
+            className="w-full bg-gray-800 text-white py-2 rounded-md hover:bg-gray-900 transition-colors flex items-center justify-center mt-4"
           >
             <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
               <path
@@ -93,15 +82,15 @@ function Signup() {
                 clipRule="evenodd"
               />
             </svg>
-            Sign up with GitHub
+            Sign in with GitHub
           </button>
         </form>
 
         <div className="mt-6 text-center">
           <p className="text-gray-600">
-            Already have an account?{' '}
-            <a href="/login" className="text-blue-600 hover:underline">
-              Log in
+            Don't have an account?{' '}
+            <a href="/signup" className="text-blue-600 hover:underline">
+              Sign up
             </a>
           </p>
         </div>
@@ -110,4 +99,4 @@ function Signup() {
   );
 }
 
-export default Signup;
+export default Login;
