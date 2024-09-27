@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Search } from 'lucide-react';
-import SearchBar from '../components/SearchBar';
 import MovieCard from '../components/MovieCard';
 import { getPopularMovies } from '../services/api';
 import logo from '../components/sources/logo.png';
 
 const HomePage = () => {
   const [popularMovies, setPopularMovies] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchPopularMovies = async () => {
@@ -22,19 +23,30 @@ const HomePage = () => {
     fetchPopularMovies();
   }, []);
 
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      navigate(`/search?query=${encodeURIComponent(searchQuery)}`);
+    }
+  };
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-[#282c34] text-white p-4">
       <div className="w-full max-w-4xl flex flex-col items-center">
         <img src={logo} alt="The Movie DB Logo" className="w-64 h-auto mb-12" />
         
-        <div className="w-full max-w-xl mb-8 relative">
+        <form onSubmit={handleSearch} className="w-full max-w-xl mb-8 relative">
           <input
             type="text"
             placeholder="Search MDB"
-            className="w-full py-3 px-4 rounded-full bg-[#98FB98] text-[#282c34] placeholder-[#282c34] focus:outline-none"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="w-full py-3 px-4 pr-12 rounded-full bg-[#98FB98] text-[#282c34] placeholder-[#282c34] focus:outline-none"
           />
-          <Search className="absolute right-3 top-1/2 transform -translate-y-1/2 text-[#282c34]" size={24} />
-        </div>
+          <button type="submit" className="absolute right-3 top-1/2 transform -translate-y-1/2 text-[#282c34]">
+            <Search size={24} />
+          </button>
+        </form>
         
         <Link 
           to="/movies" 
@@ -51,12 +63,6 @@ const HomePage = () => {
             ))}
           </div>
         </div>
-      </div>
-
-      <div className="absolute top-4 right-4">
-        <button className="bg-[#E0FFFF] text-[#282c34] px-4 py-1 rounded-full text-sm font-semibold">
-          LOGIN
-        </button>
       </div>
 
       <div className="absolute bottom-4 right-4 text-xs text-gray-500">
