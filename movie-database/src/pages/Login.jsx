@@ -1,32 +1,19 @@
 import React, { useState } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
-import { fanbaseAuthLogin, signup, logout} from '../firebase'; // Assuming this is the Fanbase auth function
-import { signup, logout } from '../firebase'; // Adjust path if necessary
-
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [captchaVerified, setCaptchaVerified] = useState(false);
-  const [error, setError] = useState('');
 
-  const handleLogin = async (e) => {
+  const handleLogin = (e) => {
     e.preventDefault();
-    
     if (!captchaVerified) {
       alert('Please complete the CAPTCHA verification');
       return;
     }
-
-    try {
-      // Assuming fanbaseAuthLogin is the method to authenticate in Fanbase
-      const user = await fanbaseAuthLogin(email, password);
-      console.log('Login successful:', user);
-      // Redirect or handle post-login behavior here
-    } catch (err) {
-      setError('Failed to login. Please check your credentials and try again.');
-      console.error('Login error:', err);
-    }
+    // Handle login logic here
+    console.log('Email:', email, 'Password:', password);
   };
 
   const onCaptchaChange = (value) => {
@@ -35,11 +22,10 @@ function Login() {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen" style={{ backgroundColor: '#282c34' }}>
+    <div className="flex justify-center items-center h-screen bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
         <h2 className="text-3xl font-bold text-center mb-8 text-blue-600">Login to Your Account</h2>
         <form onSubmit={handleLogin}>
-          {error && <div className="text-red-500 text-center mb-4">{error}</div>}
           <div className="mb-6">
             <label className="block text-gray-700 font-medium mb-2">Email</label>
             <input
@@ -63,10 +49,12 @@ function Login() {
             />
           </div>
 
+          {/* Forgot Password Link positioned here */}
           <div className="flex justify-between items-center mb-4">
             <a href="/forgot-password" className="text-blue-600 hover:underline">Forgot Password?</a>
           </div>
 
+          {/* ReCAPTCHA component */}
           <div className="mb-6">
             <ReCAPTCHA
               sitekey="6LfRDlEqAAAAAFd_gHjZ5zbOItnKWUaEnetEMi1X"
@@ -83,7 +71,7 @@ function Login() {
 
           <button
             type="button"
-            onClick={() => console.log('GitHub Login clicked')}
+            onClick={() => console.log('GitHub Signup clicked')}
             className="w-full bg-gray-800 text-white py-2 rounded-md hover:bg-gray-900 transition-colors flex items-center justify-center"
           >
             <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">

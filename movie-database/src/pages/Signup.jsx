@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
-import { auth } from '../firebase'; // Ensure you have firebase.js configured
-import { createUserWithEmailAndPassword } from '../firebase';
 
 function Signup() {
   const [username, setUsername] = useState('');
@@ -9,31 +7,19 @@ function Signup() {
   const [password, setPassword] = useState('');
   const [captchaVerified, setCaptchaVerified] = useState(false);
 
-  const handleSignup = async (e) => {
+  const handleSignup = (e) => {
     e.preventDefault();
-    
     if (!captchaVerified) {
       alert('Please complete the CAPTCHA verification');
       return;
     }
-
-    try {
-      // Sign up with Firebase using email and password
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      
-      // Optionally store additional user data (e.g., username)
-      console.log('User signed up successfully:', userCredential.user);
-      alert('User signed up successfully!');
-      
-    } catch (error) {
-      console.error('Error during sign up:', error);
-      alert(`Error during sign up: ${error.message}`);
-    }
+    // Handle signup logic here
+    console.log('Username:', username, 'Email:', email, 'Password:', password);
   };
 
   const onCaptchaChange = (value) => {
     setCaptchaVerified(true);
-    console.log('CAPTCHA verified:', value);
+    console.log('CAPTCHA value:', value);
   };
 
   const handleGitHubSignup = () => {
@@ -41,7 +27,7 @@ function Signup() {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen" style={{ backgroundColor: '#282c34' }}>
+    <div className="flex justify-center items-center h-screen bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
         <h2 className="text-3xl font-bold text-center mb-8 text-blue-600">Create an Account</h2>
         <form onSubmit={handleSignup}>
