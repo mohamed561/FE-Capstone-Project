@@ -77,7 +77,7 @@ function Login() {
                 clipRule="evenodd"
               />
             </svg>
-            Sign up with GitHub
+            Sign IN with GitHub
           </button>
         </form>
 
