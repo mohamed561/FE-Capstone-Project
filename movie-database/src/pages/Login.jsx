@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { fanbaseAuthLogin, signup, logout} from '../firebase'; // Assuming this is the Fanbase auth function
-import { login, signup, logout } from '../firebase'; // Adjust path if necessary
+import { signup, logout } from '../firebase'; // Adjust path if necessary
 
 
 function Login() {
