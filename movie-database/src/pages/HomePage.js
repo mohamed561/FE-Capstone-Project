@@ -24,7 +24,7 @@ const HomePage = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-[#f3f4f6] text-gray-800 p-4">
       <div className="w-full max-w-4xl flex flex-col items-center">
-        <img src="/sources/logo.png" alt="MovieDB Logo" className="w-48 h-auto mb-12" />
+        <img src="./src/components/sources/logo.png" alt="MovieDB Logo" className="w-48 h-auto mb-12" />
         
         <div className="w-full max-w-xl mb-8 relative">
           <SearchBar />
