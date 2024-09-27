@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 function Header() {
   return (
-    <header className="bg-blue-600 text-white p-4">
+    <header className="bg-[#00071f] text-white p-4">
       <div className="container mx-auto flex justify-between items-center">
         {/* Logo */}
         <Link to="/">
@@ -20,8 +20,8 @@ function Header() {
 
         {/* Login and Signup Buttons */}
         <div className="flex space-x-4">
-          <Link to="/login" className="bg-white text-blue-600 px-4 py-2 rounded hover:bg-gray-200">Login</Link>
-          <Link to="/signup" className="bg-white text-blue-600 px-4 py-2 rounded hover:bg-gray-200">Signup</Link>
+          <Link to="/login" className="bg-white text-[#00071f] px-4 py-2 rounded hover:bg-gray-200">Login</Link>
+          <Link to="/signup" className="bg-white text-[#00071f] px-4 py-2 rounded hover:bg-gray-200">Signup</Link>
         </div>
       </div>
     </header>
