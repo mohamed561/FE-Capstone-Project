@@ -46,10 +46,6 @@ const HomePage = () => {
           </div>
         </div>
       </div>
-
-      <div className="absolute bottom-4 right-4 text-xs text-gray-500">
-        V0.1/BY: WYATT009
-      </div>
     </div>
   );
 };
