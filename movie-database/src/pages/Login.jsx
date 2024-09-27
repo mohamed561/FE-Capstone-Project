@@ -21,11 +21,6 @@ function Login() {
     console.log('CAPTCHA value:', value);
   };
 
-  // Define the handleGitHubSignup function
-  const handleGitHubSignup = () => {
-    window.location.href = 'https://github.com/login/oauth/authorize?client_id=YOUR_CLIENT_ID';
-  };
-
   return (
     <div className="flex justify-center items-center h-screen bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
@@ -54,25 +49,29 @@ function Login() {
             />
           </div>
 
-          <div className="flex justify-between items-center mb-6">
-            <div>
-              <ReCAPTCHA
-                sitekey="6LfRDlEqAAAAAFd_gHjZ5zbOItnKWUaEnetEMi1X"
-                onChange={onCaptchaChange}
-              />
-            </div>
+          {/* Forgot Password Link positioned here */}
+          <div className="flex justify-between items-center mb-4">
             <a href="/forgot-password" className="text-blue-600 hover:underline">Forgot Password?</a>
+          </div>
+
+          {/* ReCAPTCHA component */}
+          <div className="mb-6">
+            <ReCAPTCHA
+              sitekey="6LfRDlEqAAAAAFd_gHjZ5zbOItnKWUaEnetEMi1X"
+              onChange={onCaptchaChange}
+            />
           </div>
 
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition-colors"
+            className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition-colors mb-4"
           >
             Login
           </button>
+
           <button
             type="button"
-            onClick={handleGitHubSignup}
+            onClick={() => console.log('GitHub Signup clicked')}
             className="w-full bg-gray-800 text-white py-2 rounded-md hover:bg-gray-900 transition-colors flex items-center justify-center"
           >
             <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
@@ -82,7 +81,7 @@ function Login() {
                 clipRule="evenodd"
               />
             </svg>
-            Sign IN with GitHub
+            Sign in with GitHub
           </button>
         </form>
 
