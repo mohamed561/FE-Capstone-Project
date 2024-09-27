@@ -21,6 +21,11 @@ function Login() {
     console.log('CAPTCHA value:', value);
   };
 
+  // Define the handleGitHubSignup function
+  const handleGitHubSignup = () => {
+    window.location.href = 'https://github.com/login/oauth/authorize?client_id=YOUR_CLIENT_ID';
+  };
+
   return (
     <div className="flex justify-center items-center h-screen bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
