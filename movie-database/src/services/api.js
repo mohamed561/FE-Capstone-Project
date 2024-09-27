@@ -18,3 +18,17 @@ export const getPopularMovies = async () => {
   const response = await axios.get(`${BASE_URL}?apikey=${API_KEY}&s=movie&type=movie`);
   return response.data.Search || [];
 };
+
+export const fetchMovies = async () => {
+  try {
+    const response = await fetch(`${BASE_URL}?apikey=${API_KEY}&s=batman`); // Example query
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    const data = await response.json();
+    return data.Search; // Assuming the API returns a 'Search' array
+  } catch (error) {
+    console.error('Failed to fetch movies:', error);
+    throw error; // Re-throw the error to handle it in your component
+  }
+};
