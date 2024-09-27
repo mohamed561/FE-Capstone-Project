@@ -30,13 +30,12 @@ const HomePage = () => {
           <SearchBar />
         </div>
         
-        <Link 
-          to="src\pages\Listofallmovies.js" 
+        <Link to="Listofallmovies" 
           className="mb-12 bg-[#E0FFFF] text-[#282c34] px-6 py-2 rounded-full hover:bg-[#B0E0E6] transition-colors text-sm font-semibold"
         >
           View Full Website
         </Link>
-        
+    
         <div className="w-full">
           <h2 className="text-xl font-semibold mb-4 text-center">Popular Now</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
