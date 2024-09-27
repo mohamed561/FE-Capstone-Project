@@ -68,7 +68,7 @@ function Signup() {
           <div className="flex justify-between items-center mb-6">
             <div>
               <ReCAPTCHA
-                sitekey="YOUR_SITE_KEY"
+                sitekey="6LfRDlEqAAAAAFd_gHjZ5zbOItnKWUaEnetEMi1X"
                 onChange={onCaptchaChange}
               />
             </div>
