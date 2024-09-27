@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Search } from 'lucide-react';
 
 function SearchBar() {
   const [query, setQuery] = useState('');
@@ -13,16 +14,16 @@ function SearchBar() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex">
+    <form onSubmit={handleSubmit} className="w-full relative">
       <input
         type="text"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        placeholder="Search for movies..."
-        className="px-4 py-2 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        placeholder="Search MDB"
+        className="w-full py-3 px-4 pr-12 rounded-full bg-[#98FB98] text-[#282c34] placeholder-[#282c34] focus:outline-none"
       />
-      <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-r-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
-        Search
+      <button type="submit" className="absolute right-3 top-1/2 transform -translate-y-1/2 text-[#282c34]">
+        <Search size={24} />
       </button>
     </form>
   );
