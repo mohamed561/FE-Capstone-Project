@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
-import { auth } from './firebase'; // Ensure you have firebase.js configured
+import { auth } from '../firebase'; // Ensure you have firebase.js configured
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 
 function Signup() {
