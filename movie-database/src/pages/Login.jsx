@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
+import { auth, provider } from '../firebase';
+import { signInWithPopup } from 'firebase/auth';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -12,13 +14,22 @@ function Login() {
       alert('Please complete the CAPTCHA verification');
       return;
     }
-    // Handle login logic here
+  
     console.log('Email:', email, 'Password:', password);
   };
 
   const onCaptchaChange = (value) => {
-    setCaptchaVerified(true);  // When captcha is solved
+    setCaptchaVerified(true); 
     console.log('CAPTCHA value:', value);
+  };
+
+  const handleGitHubSignIn = async () => {
+    try {
+      const result = await signInWithPopup(auth, provider);
+      console.log('GitHub User:', result.user);
+    } catch (error) {
+      console.error('GitHub sign-in error:', error);
+    }
   };
 
   return (
@@ -66,6 +77,15 @@ function Login() {
             Login
           </button>
         </form>
+
+        <div className="mt-6">
+          <button
+            onClick={handleGitHubSignIn}
+            className="w-full bg-gray-900 text-white py-2 rounded-md hover:bg-gray-800 transition-colors"
+          >
+            Sign in with GitHub
+          </button>
+        </div>
 
         <div className="mt-6 text-center">
           <p className="text-gray-600">
