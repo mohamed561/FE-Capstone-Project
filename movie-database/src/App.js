@@ -13,7 +13,7 @@ import ForgotPassword from './pages/ForgotPassword';
 function App() {
   return (
     <Router>
-      <div className="min-h-screen bg-[#00071f]">
+      <div className="min-h-screen bg-[#f3f4f6]">
         <Header />
         <main className="flex-grow container mx-auto px-4 py-8">
           <Routes>
