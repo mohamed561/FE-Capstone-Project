@@ -1,34 +1,35 @@
-import axios from 'axios';
-
-const API_KEY = 'e9b834';
-const BASE_URL = 'https://www.omdbapi.com/';
-
-export const searchMovies = async (query) => {
-  const response = await axios.get(`${BASE_URL}?apikey=${API_KEY}&s=${query}`);
-  return response.data;
-};
-
-export const getMovieDetails = async (id) => {
-  const response = await axios.get(`${BASE_URL}?apikey=${API_KEY}&i=${id}`);
-  return response.data;
-};
+// services/api.js
+const TMDB_API_KEY = '0c84e8d72cf9033a83b340af591f4cdc';
+const OMDB_API_KEY = 'e9b834';
+const TMDB_BASE_URL = 'https://api.themoviedb.org/3';
+const OMDB_BASE_URL = 'http://www.omdbapi.com';
 
 export const getPopularMovies = async () => {
-  // Since OMDB doesn't have a 'popular movies' endpoint, we'll search for a common term
-  const response = await axios.get(`${BASE_URL}?apikey=${API_KEY}&s=movie&type=movie`);
-  return response.data.Search || [];
-};
-
-export const fetchMovies = async () => {
   try {
-    const response = await fetch(`${BASE_URL}?apikey=${API_KEY}&s=batman`); // Example query
+    const response = await fetch(`${TMDB_BASE_URL}/movie/popular?api_key=${TMDB_API_KEY}&language=en-US&page=1`);
     if (!response.ok) {
-      throw new Error('Network response was not ok');
+      throw new Error('Failed to fetch popular movies');
     }
     const data = await response.json();
-    return data.Search; // Assuming the API returns a 'Search' array
+    return data.results;
   } catch (error) {
-    console.error('Failed to fetch movies:', error);
-    throw error; // Re-throw the error to handle it in your component
+    console.error('Error fetching popular movies:', error);
+    throw error;
   }
 };
+
+export const getMovieDetails = async (imdbId) => {
+  try {
+    const response = await fetch(`${OMDB_BASE_URL}/?i=${imdbId}&apikey=${OMDB_API_KEY}`);
+    if (!response.ok) {
+      throw new Error('Failed to fetch movie details');
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error fetching movie details:', error);
+    throw error;
+  }
+};
+
+// ... other API functions ...

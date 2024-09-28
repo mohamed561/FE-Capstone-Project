@@ -1,26 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function MovieCard({ movie }) {
+const MovieCard = ({ movie }) => {
   return (
-    <Link to={`/movie/${movie.imdbID}`} className="block">
-      <div className="relative group overflow-hidden rounded-lg transition-transform duration-300 transform hover:scale-105">
-        <img 
-          src={movie.Poster !== 'N/A' ? movie.Poster : '/placeholder-image.jpg'} 
-          alt={movie.Title} 
+    <Link to={`/movie/${movie.imdb_id}`} className="block">
+      <div className="bg-gray-800 rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105">
+        <img
+          src={movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : 'https://via.placeholder.com/300x450?text=No+Image'}
+          alt={movie.title}
           className="w-full h-64 object-cover"
         />
-        <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-70 transition-opacity duration-300 flex flex-col justify-end p-4">
-          <h2 className="text-white text-lg font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            {movie.Title}
-          </h2>
-          <p className="text-gray-300 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            {movie.Year}
-          </p>
+        <div className="p-4">
+          <h3 className="text-lg font-semibold text-white truncate">{movie.title}</h3>
+          <p className="text-sm text-gray-400">{movie.release_date.split('-')[0]}</p>
         </div>
       </div>
     </Link>
   );
-}
+};
 
 export default MovieCard;

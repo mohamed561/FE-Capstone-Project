@@ -26,6 +26,8 @@ function App() {
             <Route path="/signup" element={<Signup />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/recent-movies" element={<RecentMoviesList />} />
+            <Route path="/search" element={<SearchResultsPage />} />
+        <Route path="/movie/:id" element={<MovieDetailsPage />} />
           </Routes>
         </main>
         <Footer />
