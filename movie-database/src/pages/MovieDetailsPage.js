@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { getMovieDetails } from '../services/api';
-import { getMovieDetails } from '../services/tmdbApi';
 
 function MovieDetailsPage() {
   const [movie, setMovie] = useState(null);
