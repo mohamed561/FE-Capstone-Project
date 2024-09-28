@@ -9,7 +9,7 @@ import FavoritesPage from './pages/FavoritesPage';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import ForgotPassword from './pages/ForgotPassword';
-import ListOfAllMovies from './pages/Listofallmovies';
+import RecentMoviesList from './pages/RecentMoviesList';
 
 function App() {
   return (
@@ -26,6 +26,7 @@ function App() {
             <Route path="/signup" element={<Signup />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/movies" element={<ListOfAllMovies />} />
+            <Route path="/" element={<RecentMoviesList />} />
           </Routes>
         </main>
         <Footer />
