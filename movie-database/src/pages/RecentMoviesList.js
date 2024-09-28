@@ -1,7 +1,7 @@
 // components/RecentMoviesList.js
 import React, { useState, useEffect } from 'react';
 import { fetchRecentMovies } from '../services/tmdbApi';
-import MovieCard from './MovieCard';
+import MovieCard from '../components/MovieCard';
 
 const RecentMoviesList = () => {
   const [movies, setMovies] = useState([]);
