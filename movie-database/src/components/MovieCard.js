@@ -8,7 +8,7 @@ function MovieCard({ movie }) {
 
   useEffect(() => {
     const fetchTrailer = async () => {
-      const apiKey = 'YOUR_YOUTUBE_API_KEY'; // Replace with your YouTube API key
+      const apiKey = 'AIzaSyB7Y8ImDXNy_SowmLhmDTMlytuI0Rk_Ykg'; // Replace with your YouTube API key
       const query = `${movie.Title} trailer ${movie.Year}`;
 
       console.log('Fetching trailer for:', query); // Debugging log
