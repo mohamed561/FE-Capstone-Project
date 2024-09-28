@@ -1,35 +1,35 @@
-// services/api.js
+// services/tmdbApi.js
 const TMDB_API_KEY = '0c84e8d72cf9033a83b340af591f4cdc';
-const OMDB_API_KEY = 'e9b834';
-const TMDB_BASE_URL = 'https://api.themoviedb.org/3';
-const OMDB_BASE_URL = 'http://www.omdbapi.com';
+const BASE_URL = 'https://api.themoviedb.org/3';
 
-export const getPopularMovies = async () => {
+export const fetchRecentMovies = async (page = 1) => {
   try {
-    const response = await fetch(`${TMDB_BASE_URL}/movie/popular?api_key=${TMDB_API_KEY}&language=en-US&page=1`);
+    const response = await fetch(
+      `${BASE_URL}/movie/now_playing?api_key=${TMDB_API_KEY}&language=en-US&page=${page}`
+    );
     if (!response.ok) {
-      throw new Error('Failed to fetch popular movies');
-    }
-    const data = await response.json();
-    return data.results;
-  } catch (error) {
-    console.error('Error fetching popular movies:', error);
-    throw error;
-  }
-};
-
-export const getMovieDetails = async (imdbId) => {
-  try {
-    const response = await fetch(`${OMDB_BASE_URL}/?i=${imdbId}&apikey=${OMDB_API_KEY}`);
-    if (!response.ok) {
-      throw new Error('Failed to fetch movie details');
+      throw new Error('Failed to fetch recent movies');
     }
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error('Error fetching movie details:', error);
+    console.error('Error fetching recent movies:', error);
     throw error;
   }
 };
 
-// ... other API functions ...
+export const searchMovies = async (query, page = 1) => {
+  try {
+    const response = await fetch(
+      `${BASE_URL}/search/movie?api_key=${TMDB_API_KEY}&language=en-US&query=${encodeURIComponent(query)}&page=${page}`
+    );
+    if (!response.ok) {
+      throw new Error('Failed to search movies');
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error searching movies:', error);
+    throw error;
+  }
+};
