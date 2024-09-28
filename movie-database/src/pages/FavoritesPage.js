@@ -12,10 +12,11 @@ function FavoritesPage() {
 
   return (
     <div>
-      <h1 className="text-3xl font-bold mb-6">My Favorites</h1>
+      <h1 className="text-3xl font-bold mb-6 text-white">My Favorites</h1>
       {favorites.length === 0 ? (
-        <p>No favorites here, 
-          <Link to="/login" className="text-white-500 underline ml-1">Login </Link> 
+        <p className="text-white">
+          No favorites here, 
+          <Link to="/login" className="text-blue-500 underline ml-1"> Login </Link> 
           to reach yours.
         </p>
       ) : (
