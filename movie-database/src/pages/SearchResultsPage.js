@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import MovieCard from '../components/MovieCard';
 import SearchBar from '../components/SearchBar';
-import { searchMovies } from '../services/api';
+import { searchMovies } from '../services/tmdbApi';
 
 function SearchResultsPage() {
   const [movies, setMovies] = useState([]);
