@@ -30,7 +30,7 @@ const HomePage = () => {
           <SearchBar />
         </div>
         
-        <Link to="Listofallmovies" 
+        <Link to="/recent-movies" 
           className="mb-12 bg-[#E0FFFF] text-[#282c34] px-6 py-2 rounded-full hover:bg-[#B0E0E6] transition-colors text-sm font-semibold"
         >
           View Full Website
