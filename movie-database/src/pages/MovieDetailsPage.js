@@ -24,6 +24,15 @@ function MovieDetailsPage() {
     fetchMovieDetails();
   }, [id]);
 
+  // Function to handle the "Get Trailer" button click
+  const handleTrailerClick = () => {
+    if (movie) {
+      const query = `${movie.Title} trailer ${movie.Year}`;
+      const youtubeSearchUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(query)}`;
+      window.open(youtubeSearchUrl, '_blank'); // Open YouTube search results in a new tab
+    }
+  };
+
   if (loading) return (
     <div className="flex justify-center items-center h-screen bg-[#282c34]">
       <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-[#98FB98]"></div>
@@ -59,6 +68,15 @@ function MovieDetailsPage() {
                 <p><span className="text-[#98FB98]">Actors:</span> {movie.Actors}</p>
                 <p><span className="text-[#98FB98]">Rating:</span> {movie.imdbRating}/10</p>
               </div>
+
+              {/* "Get Trailer" Button */}
+              <button
+                onClick={handleTrailerClick}
+                className="mt-4 bg-orange-500 text-white py-2 px-4 rounded-lg hover:bg-orange-600 transition-colors duration-300"
+                style={{ borderRadius: '12px' }} // Rounded corners
+              >
+                Get Trailer
+              </button>
             </div>
           </div>
         </div>
