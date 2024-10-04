@@ -33,3 +33,19 @@ export const searchMovies = async (query, page = 1) => {
     throw error;
   }
 };
+
+export const fetchMovieDetails = async (movieId) => {
+  try {
+    const response = await fetch(
+      `${BASE_URL}/movie/${movieId}?api_key=${TMDB_API_KEY}&language=en-US&append_to_response=credits`
+    );
+    if (!response.ok) {
+      throw new Error('Failed to fetch movie details');
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error fetching movie details:', error);
+    throw error;
+  }
+};

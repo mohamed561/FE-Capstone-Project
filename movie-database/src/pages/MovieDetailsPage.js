@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { getMovieDetails } from '../services/api';
+import { fetchMovieDetails } from '../services/tmdbApi';
 
 function MovieDetailsPage() {
   const [movie, setMovie] = useState(null);
@@ -9,10 +9,10 @@ function MovieDetailsPage() {
   const { id } = useParams();
 
   useEffect(() => {
-    const fetchMovieDetails = async () => {
+    const fetchDetails = async () => {
       try {
         setLoading(true);
-        const data = await getMovieDetails(id);
+        const data = await fetchMovieDetails(id);
         setMovie(data);
       } catch (err) {
         setError('Failed to fetch movie details. Please try again.');
@@ -21,15 +21,14 @@ function MovieDetailsPage() {
       }
     };
 
-    fetchMovieDetails();
+    fetchDetails();
   }, [id]);
 
-  // Function to handle the "Get Trailer" button click
   const handleTrailerClick = () => {
     if (movie) {
-      const query = `${movie.Title} trailer ${movie.Year}`;
+      const query = `${movie.title} trailer ${movie.release_date.split('-')[0]}`;
       const youtubeSearchUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(query)}`;
-      window.open(youtubeSearchUrl, '_blank'); // Open YouTube search results in a new tab
+      window.open(youtubeSearchUrl, '_blank');
     }
   };
 
@@ -57,23 +56,28 @@ function MovieDetailsPage() {
         <Link to="/" className="inline-block mb-6 text-[#98FB98] hover:underline">&larr; Back to Home</Link>
         <div className="bg-[#1e2128] rounded-lg shadow-xl overflow-hidden">
           <div className="md:flex">
-            <img src={movie.Poster !== 'N/A' ? movie.Poster : '/placeholder-image.jpg'} alt={movie.Title} className="w-full md:w-1/3 object-cover" />
+            <img 
+              src={movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : '/placeholder-image.jpg'} 
+              alt={movie.title} 
+              className="w-full md:w-1/3 object-cover" 
+            />
             <div className="p-6 md:p-8">
-              <h1 className="text-3xl font-bold mb-2">{movie.Title}</h1>
-              <p className="text-[#98FB98] mb-4">{movie.Year} | {movie.Runtime} | {movie.Genre}</p>
-              <p className="mb-6 text-gray-300">{movie.Plot}</p>
+              <h1 className="text-3xl font-bold mb-2">{movie.title}</h1>
+              <p className="text-[#98FB98] mb-4">
+                {movie.release_date.split('-')[0]} | {movie.runtime} min | {movie.genres.map(g => g.name).join(', ')}
+              </p>
+              <p className="mb-6 text-gray-300">{movie.overview}</p>
               <div className="grid grid-cols-2 gap-4 text-sm">
-                <p><span className="text-[#98FB98]">Director:</span> {movie.Director}</p>
-                <p><span className="text-[#98FB98]">Writers:</span> {movie.Writer}</p>
-                <p><span className="text-[#98FB98]">Actors:</span> {movie.Actors}</p>
-                <p><span className="text-[#98FB98]">Rating:</span> {movie.imdbRating}/10</p>
+                <p><span className="text-[#98FB98]">Director:</span> {movie.credits?.crew.find(c => c.job === 'Director')?.name || 'N/A'}</p>
+                <p><span className="text-[#98FB98]">Writers:</span> {movie.credits?.crew.filter(c => c.department === 'Writing').map(w => w.name).join(', ') || 'N/A'}</p>
+                <p><span className="text-[#98FB98]">Actors:</span> {movie.credits?.cast.slice(0, 3).map(a => a.name).join(', ') || 'N/A'}</p>
+                <p><span className="text-[#98FB98]">Rating:</span> {movie.vote_average.toFixed(1)}/10</p>
               </div>
 
-              {/* "Get Trailer" Button */}
               <button
                 onClick={handleTrailerClick}
                 className="mt-4 bg-orange-500 text-white py-2 px-4 rounded-lg hover:bg-orange-600 transition-colors duration-300"
-                style={{ borderRadius: '12px' }} // Rounded corners
+                style={{ borderRadius: '12px' }}
               >
                 Get Trailer
               </button>
