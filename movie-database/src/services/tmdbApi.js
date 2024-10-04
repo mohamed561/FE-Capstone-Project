@@ -37,7 +37,7 @@ export const searchMovies = async (query, page = 1) => {
 export const fetchMovieDetails = async (movieId) => {
   try {
     const response = await fetch(
-      `${BASE_URL}/movie/${movieId}?api_key=${TMDB_API_KEY}&language=en-US&append_to_response=credits`
+      `${BASE_URL}/movie/${movieId}?api_key=${TMDB_API_KEY}&language=en-US&append_to_response=credits,videos`
     );
     if (!response.ok) {
       throw new Error('Failed to fetch movie details');

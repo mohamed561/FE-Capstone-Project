@@ -24,11 +24,15 @@ function MovieDetailsPage() {
     fetchDetails();
   }, [id]);
 
+  // Function to handle trailer click
   const handleTrailerClick = () => {
-    if (movie) {
-      const query = `${movie.title} trailer ${movie.release_date.split('-')[0]}`;
-      const youtubeSearchUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(query)}`;
-      window.open(youtubeSearchUrl, '_blank');
+    if (movie && movie.videos && movie.videos.results.length > 0) {
+      const trailer = movie.videos.results.find(video => video.type === 'Trailer');
+      if (trailer) {
+        window.open(`https://www.youtube.com/watch?v=${trailer.key}`, '_blank');
+      } else {
+        alert("No trailer found for this movie.");
+      }
     }
   };
 
