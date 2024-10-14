@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { fetchMovieDetails } from '../services/tmdbApi';
 
 function MovieDetailsPage() {
@@ -7,6 +7,7 @@ function MovieDetailsPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchDetails = async () => {
@@ -34,6 +35,11 @@ function MovieDetailsPage() {
         alert("No trailer found for this movie.");
       }
     }
+  };
+
+  // Function to handle add to favorites click
+  const handleAddToFavorites = () => {
+    navigate('../pages/FavoritesPage.js');
   };
 
   if (loading) return (
@@ -78,13 +84,22 @@ function MovieDetailsPage() {
                 <p><span className="text-[#98FB98]">Rating:</span> {movie.vote_average.toFixed(1)}/10</p>
               </div>
 
-              <button
-                onClick={handleTrailerClick}
-                className="mt-4 bg-orange-500 text-white py-2 px-4 rounded-lg hover:bg-orange-600 transition-colors duration-300"
-                style={{ borderRadius: '12px' }}
-              >
-                Get Trailer
-              </button>
+              <div className="mt-4 flex space-x-4">
+                <button
+                  onClick={handleTrailerClick}
+                  className="bg-orange-500 text-white py-2 px-4 rounded-lg hover:bg-orange-600 transition-colors duration-300"
+                  style={{ borderRadius: '12px' }}
+                >
+                  Get Trailer
+                </button>
+                <button
+                  onClick={handleAddToFavorites}
+                  className="bg-white text-black py-2 px-4 rounded-lg hover:bg-blue-200 transition-colors duration-300"
+                  style={{ borderRadius: '12px' }}
+                >
+                  Add to Favorites
+                </button>
+              </div>
             </div>
           </div>
         </div>
