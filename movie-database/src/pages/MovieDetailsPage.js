@@ -39,7 +39,7 @@ function MovieDetailsPage() {
 
   // Function to handle add to favorites click
   const handleAddToFavorites = () => {
-    navigate('../pages/FavoritesPage.js');
+    navigate('favorites');
   };
 
   if (loading) return (
